@@ -1,0 +1,3 @@
+// the configured options and settings for Leetcode
+#define Leetcode_VERSION_MAJOR @Leetcode_VERSION_MAJOR@
+#define Leetcode_VERSION_MINOR @Leetcode_VERSION_MINOR@
