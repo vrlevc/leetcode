@@ -1,3 +1,18 @@
-
+# SOLUTION LIBRARY
 add_library(solution0001 solution.cpp)
 
+# UNIT TESTS
+enable_testing()
+
+add_executable(
+    test_0001
+    test.cpp
+)
+target_link_libraries(
+    test_0001
+    GTest::gtest_main
+    solution0001
+)
+
+include(GoogleTest)
+gtest_discover_tests(test_0001)
