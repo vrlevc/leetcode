@@ -8,7 +8,7 @@ using namespace solution0001;
 // Demonstrate some basic assertions.
 TEST(solution0001Test, Test001) {
     // Expectations:
-    vector<int> exp = {1, 2};
+    vector<int> exp = {1, 2, 3};
     // Execute solution
     Solution s;
     vector<int> res = s.twoSum({3,2,4}, 6);
