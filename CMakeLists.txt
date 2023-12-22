@@ -10,6 +10,7 @@ project(Leetcode VERSION 1.0)
 
 # SOLUTION 0001
 add_subdirectory(solutions/0001)
+add_subdirectory(solutions/1422)
 add_subdirectory(solutions/1637)
 
 # UNIT TESTING : GOOGLE TEST
