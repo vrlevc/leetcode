@@ -1,9 +1,0 @@
-{
-    "files.associations": {
-        "cstdlib": "cpp",
-        "unordered_map": "cpp",
-        "vector": "cpp",
-        "array": "cpp",
-        "initializer_list": "cpp"
-    }
-}
