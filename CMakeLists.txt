@@ -18,6 +18,7 @@ add_subdirectory(solutions/1095)
 add_subdirectory(solutions/1422)
 add_subdirectory(solutions/1496)
 add_subdirectory(solutions/1637)
+add_subdirectory(solutions/1658)
 
 # UNIT TESTING : GOOGLE TEST
 include(FetchContent)
