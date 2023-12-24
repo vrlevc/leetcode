@@ -11,6 +11,7 @@ project(Leetcode VERSION 1.0)
 # SOLUTION 0001
 add_subdirectory(solutions/xxxx)
 add_subdirectory(solutions/0001)
+add_subdirectory(solutions/0003)
 add_subdirectory(solutions/0023)
 add_subdirectory(solutions/0119)
 add_subdirectory(solutions/0229)
