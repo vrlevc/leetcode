@@ -1,6 +1,7 @@
 
 #include "solution.h"
-#include <memory>
+#include <algorithm>
+#include <stdlib.h>
 #include <memory.h>
 using namespace std;
 
