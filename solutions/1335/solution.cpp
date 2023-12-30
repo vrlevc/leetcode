@@ -29,8 +29,10 @@ int Solution::minDifficulty(vector<int>& jobDifficulty, int d)
             else {
                 JMAX = jobDifficulty[ii];
                 DB[dd*N + ii] = DB[(dd-1)*N + ii-1] + JMAX;
-                for ( short vv = ii-1; vv >= dd-1; --vv ) {
-                    TEMP = DB[(dd-1)*N + vv-1] + max((short)jobDifficulty[vv], JMAX);
+                for ( short vv = ii-1; vv > 0; --vv ) {
+                    if (DB[(dd-1)*N + vv-1] == -1) break;
+                    JMAX = max((short)jobDifficulty[vv], JMAX);
+                    TEMP = DB[(dd-1)*N + vv-1] + JMAX;
                     DB[dd*N + ii] = min(TEMP, DB[dd*N + ii]);
                 }
             }
