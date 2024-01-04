@@ -19,3 +19,13 @@ TEST(solution1531Test, Test003) {
     Solution s;
     EXPECT_EQ(s.getLengthOfOptimalCompression("aaaaaaaaaaa", 0), 3);
 } 
+
+TEST(solution1531Test, Test004) {
+    Solution s;
+    EXPECT_EQ(s.getLengthOfOptimalCompression("llllllllllttttttttt", 1), 4);
+} 
+
+TEST(solution1531Test, Test005) {
+    Solution s;
+    EXPECT_EQ(s.getLengthOfOptimalCompression("aaaabbab", 3), 2);
+} 
