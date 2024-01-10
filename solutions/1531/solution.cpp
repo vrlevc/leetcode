@@ -1,7 +1,7 @@
 
 #include "solution.h"
-#include <list>
-#include <algorithm>
+#include <vector>
+
 using namespace std;
 
 namespace solution1531
@@ -9,75 +9,34 @@ namespace solution1531
 
 int Solution::getLengthOfOptimalCompression(string s, int k)
 {
-    list<pair<char, int>> code;
-    char c=static_cast<char>(s[0]), r = 1, n=1, N = s.length();
-    for (; r<=N; ++r) {
-        if (c!=s[r]){
-            code.push_back({c,n});
-            if (r==N) break;
-            n=1;
-            c=s[r];
-        }else{ // update sequence
-            ++n;
-        }
-    }
-    
-    n=1;
-    while (k>0&&code.size()) {
-        
-        if (code.size() >= 3) {
-            auto l = code.begin();
-            auto c = l; ++c;
-            auto r = c; ++r;
-            while ( true ) {
-                if ( c->second == n && l->first == r->first && n<=k ) {
-                    l->second += r->second;
-                    k -= n;
-                    code.erase(r); code.erase(c);
-                } else {
-                    ++l; if (l==code.end()) break;
+    int n = s.length();
+    vector<vector<int>> dp(110, vector<int>(110, 9999)); // Initializing a 2D vector 'dp' of size 110x110 with value 9999
+    dp[0][0] = 0; // Initializing the base case where no characters and deletions exist
+
+    for (int i = 1; i <= n; i++) {
+        for (int j = 0; j <= k; j++) {
+            int cnt = 0, del = 0;
+            for (int l = i; l >= 1; l--) {
+                // Count the frequency of characters from 'i' to 'l'
+                if (s[l - 1] == s[i - 1]) 
+                    cnt++;
+                else 
+                    del++;
+                
+                // Check if the remaining allowed deletions are valid (j - del >= 0)
+                if (j - del >= 0) {
+                    // Update the dp array based on the conditions
+                    dp[i][j] = min(dp[i][j],
+                        dp[l - 1][j - del] + 1 + (cnt >= 100 ? 3 : cnt >= 10 ? 2 : cnt >= 2 ? 1 : 0));
                 }
-                c=l; ++c; if (c==code.end()) break;
-                r=c; ++r; if (r==code.end()) break;
             }
+            
+            // If there are remaining allowed deletions (j > 0), consider the case without deleting current character
+            if (j > 0)
+                dp[i][j] = min(dp[i][j], dp[i - 1][j - 1]);
         }
-
-        auto c = code.begin();
-        while ( c!=code.end() ) {
-            auto l = c; ++c;
-            if ( l->second == n && n<=k ) { k-=n; code.erase(l); }
-        }
-
-        ++n;
-        if (n>k) break;
     }
-
-    while (k>0&&code.size()) {
-        code.sort([](const auto& a, const auto& b)->bool{ 
-            int ax=0, bx=0;
-            if      (a.second > 99) ax = a.second - 99;
-            else if (a.second >  9) ax = a.second - 9;
-            else                    ax = a.second;
-            if      (b.second > 99) bx = b.second - 99;
-            else if (b.second >  9) bx = b.second - 9;
-            else                    bx = b.second;
-            return ax<bx;
-        });
-        auto& a = code.front();
-        if      (a.second > 99) { if (k<a.second-99) break; k-=a.second-99; a.second=99; } 
-        else if (a.second >  9) { if (k<a.second- 9) break; k-=a.second- 9; a.second= 9; }
-        else                    { if (k<a.second)    break; k-=a.second;    code.pop_front(); }
-    }
-
-    N = 0;
-    for (const auto& v: code) {
-        ++N;
-        if (v.second> 1) ++N;
-        if (v.second> 9) ++N;
-        if (v.second>99) ++N;
-    }
-
-    return N;
+    return dp[n][k]; // Return the minimum length for 's' with at most 'k' deletions
 }
 
 }
